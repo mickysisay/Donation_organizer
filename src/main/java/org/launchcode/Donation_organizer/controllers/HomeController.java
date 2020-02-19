@@ -83,9 +83,13 @@ public class HomeController {
         return "redirect:";
     }
     @GetMapping("/login")
-    public String displayLoginForm(Model model) {
+    public String displayLoginForm(Model model,HttpServletRequest request) {
         model.addAttribute(new LoginFormDTO());
         model.addAttribute("title", "Log In");
+        if(request.getSession().getAttribute("user")!= null){
+            return "redirect:/store";
+       }
+
         return "login";
     }
     @PostMapping("/login")
