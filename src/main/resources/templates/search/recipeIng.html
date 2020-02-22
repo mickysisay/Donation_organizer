@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<title>Search Profile</title>
+<link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/searchRecipeIng.js}"></script>
+</head>
+    <title>Search using ingredients</title>
+</head>
+<body>
+
+   <div id="chosenIng">
+
+   </div>
+   <form id="form" method="POST">
+   <input type="hidden" name="ingList" id="ingList">
+   <button id="search">search</button>
+   </form>
+       <input name="ingName" id="ingName">
+<div id="results">
+
+</div>
+   <div th:if="${res}">
+       <div class="panel-group">
+       <div class="panel panel-info" th:each="item:${res}">
+           <div class="panel-heading">
+           <a class="text-white" th:href="@{'/view/profile/' + ${item.user.id}}" th:text="${'Author : '+ item.getUser().getUsername()}"></a>
+           </div><div class="panel-body">
+           <a class='text-info' th:href="@{'/view/recipe/' + ${item.id}}" >
+               <h3 th:text="${item.name}"></h3></a>
+
+               <table>
+                   <tr th:each="ing:${item.getIngredients()}">
+                       <td th:text="${ing}"></td>
+                   </tr>
+               </table></div>
+               </div>
+       </div>
+   </div>
+<script>
+
+</script>
+</body>
+</html>

@@ -8,7 +8,9 @@
   <p th:text="${'hi '+user.getUsername()}"></p>
 <hr>
   <button onclick="window.location.href = 'store/addRecipe';">add recipe</button>
-
+  <button onclick="window.location.href = 'search/profiles';">search user</button>
+  <button onclick="window.location.href = 'search/recipe';">search recipe using name</button>
+  <button onclick="window.location.href = 'search/recipeIng';">search recipe using ingredients</button>
   <button onclick="window.location.href = '/logout';">Log out</button>
   <div th:each="item:${items}">
       <hr>

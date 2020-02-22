@@ -22,7 +22,7 @@ public class ViewController {
     public String viewRecipe(@PathVariable int recipeid, Model model){
        Recipe recipe = recipeRepository.findById(recipeid).get();
        model.addAttribute("recipe",recipe);
-       System.out.println(recipe.getUser().getUsername());
+
        return "view/showRecipe";
     }
     @GetMapping("/profile/{userid}")

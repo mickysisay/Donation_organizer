@@ -22,11 +22,25 @@ public class SearchAlgorithms {
             if(allRecipes.get(i).getName().toLowerCase().contains(searchWord.toLowerCase())){
                 results.add(allRecipes.get(i));
             }
-            if(results.size()>10){
+            if(results.size()>15){
                 break;
             }
         }
         return results;
 
+    }
+    public List<Recipe> searchByIng(List<Recipe> allRecipes,List<Ingredient> ing){
+        List<Recipe> results = new ArrayList<>();
+        for(int i=0;i<allRecipes.size();i++){
+
+            if(allRecipes.get(i).getIngredients().size()== ing.size() && allRecipes.get(i).getIngredients().containsAll(ing)){
+                results.add(allRecipes.get(i));
+
+            }
+            if(results.size()>15){
+                break;
+            }
+        }
+        return results;
     }
 }
