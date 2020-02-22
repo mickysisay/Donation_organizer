@@ -7,7 +7,7 @@ public class SearchAlgorithms {
     public List<User> searchUser(List<User> allUsers,String searchWord){
        List<User> results=new ArrayList<>();
         for(int i=0;i<allUsers.size();i++){
-         if(allUsers.get(i).getUsername().contains(searchWord)){
+         if(allUsers.get(i).getUsername().toLowerCase().contains(searchWord.toLowerCase())){
             results.add(allUsers.get(i));
          }
          if(results.size()>10){
@@ -15,5 +15,18 @@ public class SearchAlgorithms {
          }
         }
         return results;
+    }
+    public List<Recipe> searchRecipe(List<Recipe> allRecipes,String searchWord){
+        List<Recipe> results=new ArrayList<>();
+        for(int i=0;i<allRecipes.size();i++){
+            if(allRecipes.get(i).getName().toLowerCase().contains(searchWord.toLowerCase())){
+                results.add(allRecipes.get(i));
+            }
+            if(results.size()>10){
+                break;
+            }
+        }
+        return results;
+
     }
 }

@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@RequestMapping("Search")
+@RequestMapping("/search")
 @Controller
 public class SearchController {
     @GetMapping("/profiles")
     public String profileSearchView(){
-        return "search/profiles";
+        return "search/profile";
     }
     @PostMapping("/profiles")
     public String profileSearch(Model model, @RequestParam String name){
 
-    return "search/profiles";
+    return "search/profile";
     }
 
 }
