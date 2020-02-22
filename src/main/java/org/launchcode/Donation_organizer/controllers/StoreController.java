@@ -54,7 +54,11 @@ public class StoreController {
         List<Ingredient> ingredients1 = (List<Ingredient>) ingredientRepository.findAllById(ingredients);
        newRecipe.setIngredients(ingredients1);
         theUser.UpdateUser(newRecipe);
+        newRecipe.setUser(theUser);
+        recipeRepository.save(newRecipe);
         userRepository.save(theUser);
+
+
 
         return "redirect:";
     }

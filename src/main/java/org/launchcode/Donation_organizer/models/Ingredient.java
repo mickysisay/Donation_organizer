@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Ingredient extends AbstractEntity {
+public class Ingredient extends AbstractEntity implements Comparable<Ingredient> {
     @NotBlank
     @Size(min = 3, max = 50, message = "name must be between 3 and 50 characters")
     private String name;
@@ -51,6 +51,10 @@ public class Ingredient extends AbstractEntity {
     @Override
     public String toString(){
         return name;
+    }
+    @Override
+    public int compareTo(Ingredient o1) {
+        return o1.getName().compareTo(this.getName());
     }
 
 }

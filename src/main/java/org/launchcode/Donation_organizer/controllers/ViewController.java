@@ -22,13 +22,15 @@ public class ViewController {
     public String viewRecipe(@PathVariable int recipeid, Model model){
        Recipe recipe = recipeRepository.findById(recipeid).get();
        model.addAttribute("recipe",recipe);
-       return "showRecipe";
+       System.out.println(recipe.getUser().getUsername());
+       return "view/showRecipe";
     }
     @GetMapping("/profile/{userid}")
     public String viewProfile(@PathVariable int userid,Model model){
         User user = userRepository.findById(userid).get();
         model.addAttribute("user",user);
-        return "showProfile";
+
+        return "view/showProfile";
     }
 
 }

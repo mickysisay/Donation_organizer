@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8" />
+    <title>profile</title>
+</head>
+<body>
+<h2 th:text="${user.username}"></h2>
+
+<div th:each="item:${user.getRecipe()}">
+    <a th:href="@{'/view/recipe/' + ${item.id}}" >
+    <hr>
+    <h3 th:text="${item.name}"></h3>
+    <table>
+        <tr th:each="ing:${item.getIngredients()}">
+            <td th:text="${ing}"></td>
+        </tr>
+    </table>
+    <hr></a></div>
+</body>
+</html>
