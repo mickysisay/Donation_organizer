@@ -17,9 +17,12 @@ function inputResults(res){
    let result = document.getElementById("results");
    let allResults = "";
    for(let i=0;i<res.length;i++){
-   allResults+="<a href='http://localhost:8080/view/profile/"+res[i].id+"'>";
+   allResults+="<a href='"+document.location.origin+"/view/profile/"+res[i].id+"'>";
    allResults+=  res[i].username+"</a>";
 
+   }
+   if(res.length===0 && $("#searchWord").val().trim()!=="" ){
+   allResults+="<P>no users found</p>"
    }
    result.innerHTML =allResults;
 }

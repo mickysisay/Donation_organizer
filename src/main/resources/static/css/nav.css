@@ -190,3 +190,7 @@ a.article:hover {
         display: none;
     }
 }
+.inactiveLink {
+   pointer-events: none;
+   cursor: default;
+}
