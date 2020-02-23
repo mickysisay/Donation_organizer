@@ -51,9 +51,6 @@ public class StoreController {
         Integer id = (Integer) request.getSession().getAttribute("user");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
-        for(int i=0;i<ingredients.size();i++){
-            System.out.println(ingredients.get(i));
-        }
         List<Ingredient> ingredients1 = (List<Ingredient>) ingredientRepository.findAllById(ingredients);
        newRecipe.setIngredients(ingredients1);
         theUser.UpdateUser(newRecipe);

@@ -12,7 +12,7 @@ window.onload = function(){
                           searchWord:$("#ingName").val()
                        },
                        success:function(response){
-                       console.log(response);
+
                        inputResults(response);
 
                        }

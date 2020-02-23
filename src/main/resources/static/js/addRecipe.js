@@ -17,10 +17,36 @@ $("#ingName").keyup(()=>{
 
                        }
                        });});
+document.getElementById("ingAdd").addEventListener("click",()=>{
+console.log($("#ingredientName").val().length)
+  if($("#ingredientName").val().trim().length!==0){
+        $.ajax({
+                               type: "POST",
+                               url: "/look/addItem",
+                               data: {
+                                  ingredientName:$("#ingredientName").val()
+                               },
+                               success:function(response){
 
+                               document.getElementById("noResult").innerHTML=response;
+                               setTimeout(function(){
+                               document.getElementById("noResult").innerHTML="";
+                               },2000);
+
+                                // allResults+=`<p>{}</p>`
+
+
+                               }
+                               })
+        }else{
+        alert("ingredient name should atleast 3 letters ");
+        }
+
+})
 
 function inputResults(res){
   let result = document.getElementById("result");
+  let noResult = document.getElementById("noResult");
   let allResults = "";
   for(let i=0;i<res.length;i++){
   allResults+=`<div class='view overlay zoom' id="${res[i].id},${res[i].name}"><p id="${res[i].id},${res[i].name}">${res[i].name}
@@ -28,6 +54,16 @@ function inputResults(res){
 
     }
      result.innerHTML =allResults;
+    if(res.length===0){
+    result.innerHTML="";
+    allResults+="<P>no ingredients found</p>"
+   allResults+= '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Add new Ingredient </button>';
+    noResult.innerHTML = allResults;
+    }else{
+    allResults.innerHTML="";
+       result.innerHTML =allResults;
+    }
+
   }
   function addItem(id,name){
 

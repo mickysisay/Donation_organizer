@@ -18,7 +18,7 @@ public class ItemController {
     public List<Ingredient> addItem(@RequestParam String searchWord){
       List<Ingredient> allFound= ingredientRepository.findAll();
      List<Ingredient> found = new ArrayList<>();
-
+        if(!searchWord.isEmpty()) {
      for(int i=0;i<allFound.size();i++){
        if(allFound.get(i).toString().toLowerCase().contains(searchWord.toLowerCase())){
            found.add(allFound.get(i));
@@ -26,8 +26,19 @@ public class ItemController {
        if(found.size()>10){
            break;
        }
-     }
+     }}
      return found;
+    }
+    @PostMapping("addItem")
+    public String addIngRest(@RequestParam String ingredientName){
+        if(ingredientName.trim().length()>3){
+           Ingredient ingredient = new Ingredient();
+           ingredient.setName(ingredientName);
+           ingredientRepository.save(ingredient);
+           return "ingredient added succesfully";
+        }else{
+            return "there was a problem adding ingredient";
+        }
     }
 
 
