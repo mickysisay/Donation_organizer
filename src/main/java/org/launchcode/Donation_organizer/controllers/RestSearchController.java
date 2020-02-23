@@ -26,8 +26,9 @@ public class RestSearchController {
      public List<User> searchUser(@RequestParam String searchWord){
          SearchAlgorithms searchAlgorithms = new SearchAlgorithms();
        List<User> result = new ArrayList<>();
-
-       result =  searchAlgorithms.searchUser(userRepository.findAll(),searchWord);
+   if(!searchWord.isEmpty()) {
+       result = searchAlgorithms.searchUser(userRepository.findAll(), searchWord);
+   }
        return result;
      }
     @GetMapping("Recipe")

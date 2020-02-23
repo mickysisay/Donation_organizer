@@ -6,6 +6,7 @@ import org.launchcode.Donation_organizer.models.Recipe;
 import org.launchcode.Donation_organizer.models.SearchAlgorithms;
 import org.launchcode.Donation_organizer.models.data.IngredientRepository;
 import org.launchcode.Donation_organizer.models.data.RecipeRepository;
+import org.launchcode.Donation_organizer.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,8 @@ import java.util.List;
 @RequestMapping("/search")
 @Controller
 public class SearchController {
+    @Autowired
+    UserRepository userRepository;
     @Autowired
     RecipeRepository recipeRepository;
     @Autowired
@@ -53,6 +56,18 @@ public class SearchController {
 
         model.addAttribute("res",result);
         return "search/recipeIng";
+    }
+    @GetMapping("recipe")
+    public String searchRecipe(){
+        return "search/recipe";
+    }
+    @PostMapping("recipe")
+    public String SearchRecipeResult(Model model,@RequestParam String searchWord){
+        SearchAlgorithms searchAlgorithms = new SearchAlgorithms();
+        List<Recipe> result = new ArrayList<>();
+        result =  searchAlgorithms.searchRecipe(recipeRepository.findAll(),searchWord);
+       model.addAttribute("res",result);
+       return "search/recipe";
     }
 
 

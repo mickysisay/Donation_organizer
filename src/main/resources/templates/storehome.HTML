@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+<head th:replace="fragments :: head">
 </head>
 <body>
-  <p th:text="${'hi '+user.getUsername()}"></p>
-<hr>
-  <button onclick="window.location.href = 'store/addRecipe';">add recipe</button>
-  <button onclick="window.location.href = 'search/profiles';">search user</button>
-  <button onclick="window.location.href = 'search/recipe';">search recipe using name</button>
-  <button onclick="window.location.href = 'search/recipeIng';">search recipe using ingredients</button>
-  <button onclick="window.location.href = '/logout';">Log out</button>
-  <div th:each="item:${items}">
-      <hr>
-      <h3 th:text="${item.name}"></h3>
-      <table>
-          <tr th:each="ing:${item.getIngredients()}">
-            <td th:text="${ing}"></td>
-          </tr>
-      </table>
-      <hr></div>
+<div id="wrapper">
+<nav id="sidebar" th:replace="fragments :: nav-bar"></nav>
+<div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button>
+        </div>
+    </nav>
+    <p th:text="${'hi '+user.getUsername()}"></p>
+    <hr>
+    <div th:each="item:${items}">
+        <hr>
+        <h3 th:text="${item.name}"></h3>
+        <table>
+            <tr th:each="ing:${item.getIngredients()}">
+                <td th:text="${ing}"></td>
+            </tr>
+        </table>
+        <hr></div>
+
+</div>
+</div>
+
+<div th:replace="fragments :: bottom"></div>
+
+
 </body>
 </html>

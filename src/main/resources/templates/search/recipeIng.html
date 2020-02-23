@@ -21,20 +21,10 @@
 
 </div>
    <div th:if="${res}">
-       <div class="panel-group">
-       <div class="panel panel-info" th:each="item:${res}">
-           <div class="panel-heading">
-           <a class="text-white" th:href="@{'/view/profile/' + ${item.user.id}}" th:text="${'Author : '+ item.getUser().getUsername()}"></a>
-           </div><div class="panel-body">
-           <a class='text-info' th:href="@{'/view/recipe/' + ${item.id}}" >
-               <h3 th:text="${item.name}"></h3></a>
 
-               <table>
-                   <tr th:each="ing:${item.getIngredients()}">
-                       <td th:text="${ing}"></td>
-                   </tr>
-               </table></div>
-               </div>
+           <div th:replace="fragments :: search-results"></div>
+
+       </div>
        </div>
    </div>
 <script>

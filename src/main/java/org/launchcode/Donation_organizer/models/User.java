@@ -1,6 +1,7 @@
 package org.launchcode.Donation_organizer.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ public class User extends AbstractEntity {
     private List<Recipe> recipe= new ArrayList<>();
     //@OneToMany(cascade = CascadeType.ALL)
     //@JoinColumn
-
+    @JsonIgnore
     public List<Recipe> getRecipe() {
         return recipe;
     }
