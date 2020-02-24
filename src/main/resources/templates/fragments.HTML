@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link th:href="@{/css/nav.css}" rel="stylesheet" />
     <!-- Scrollbar Custom CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Font Awesome JS -->
@@ -24,7 +25,7 @@
 
     <nav id="sidebar" th:fragment="nav-bar">
         <div class="sidebar-header">
-            <a href="store"> <h3>GO TO HOME</h3></a>
+            <a th:href="@{/store}"> <h3>GO TO HOME</h3></a>
         </div>
         <div id="myDropdown" class="dropdown-content">
             <form class="form-inline ml-auto">
@@ -38,22 +39,42 @@
            <!-- <p>Dummy Heading</p>-->
 
             <li>
-                <a href="store/addRecipe">Add recipe</a>
+                <a th:href="@{/store/addRecipe}">Add recipe</a>
             </li>
             <li>
-                <a href="search/recipe">search Recipe</a>
+                <a th:href="@{/search/recipe}">search Recipe</a>
 
             </li>
             <li>
-                <a href="search/recipeIng">search using ingredients</a>
+                <a th:href="@{/search/recipeIng}">search using ingredients</a>
             </li>
             <li>
-                <a href="/logout">logout</a>
+                <a th:href="@{/logout}">logout</a>
             </li>
         </ul>
 
     </nav>
+    <nav th:fragment="small-nav" class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
 
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button>
+        </div>
+    </nav>
+//recipe show
+    <div th:fragment="recipeShow">
+
+            <h3 th:text="${recipe.name}"></h3>
+            <p th:text="${recipe.getCreateDate()}" style="font-size:15px"></p>
+            <p th:text="${recipe.toString()}"></p>
+            <div th:utext="${recipe.instruction}"></div>
+
+
+        </div>
+
+//recipe show end
 <div th:fragment="search-results">
     <div class="panel-group">
         <div class="panel panel-info" th:each="item:${res}">
@@ -70,6 +91,8 @@
             </table></div>
 
         </div></div></div>
+
+
     <div th:fragment="bottom">
 
         <!-- jQuery CDN - Slim version (=without AJAX) -->

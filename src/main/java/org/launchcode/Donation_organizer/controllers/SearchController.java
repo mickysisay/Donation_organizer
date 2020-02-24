@@ -62,10 +62,10 @@ public class SearchController {
         return "search/recipe";
     }
     @PostMapping("recipe")
-    public String SearchRecipeResult(Model model,@RequestParam String searchWord){
+    public String SearchRecipeResult(Model model,@RequestParam String searchword){
         SearchAlgorithms searchAlgorithms = new SearchAlgorithms();
         List<Recipe> result = new ArrayList<>();
-        result =  searchAlgorithms.searchRecipe(recipeRepository.findAll(),searchWord);
+        result =  searchAlgorithms.searchRecipe(recipeRepository.findAll(),searchword);
        model.addAttribute("res",result);
        return "search/recipe";
     }

@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+<head th:replace="fragments :: head">
 </head>
 <body>
+<div id="wrapper">
+    <nav id="sidebar" th:replace="fragments :: nav-bar"></nav>
+    <div id="content">
+        <nav th:replace="fragments :: small-nav"></nav>
 <form id="form" method="POST">
-    <input type="hidden" name="searchWord" id="searchWord">
+    <input name="searchword" id="searchword">
     <button id="search">search</button>
 </form>
-   <div th:replace="fragments :: search-results"></div>
+    <div th:each="recipe:${res}">
+        <hr>
+        <a th:href="@{'/view/profile/' + ${recipe.user.id}}" th:text="${'Author : '+ recipe.getUser().getUsername()}"></a>
+        <div th:replace="fragments :: recipeShow"></div>
+        <hr>
+    </div>
+    </div></div>
+   <div th:replace="fragments :: bottom"></div>
 </body>
 </html>

@@ -1,16 +1,48 @@
 package org.launchcode.Donation_organizer.models;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity
 public class Recipe extends AbstractEntity  {
 
+    @NotBlank
+    @Size(min = 100, max = 5000, message = "instruction should be between 100 and 5000")
+    private String instruction;
+
+    public String getInstruction() {
+        return instruction;
+    }
+
+    public void setInstruction(String instruction) {
+        this.instruction = instruction;
+    }
+    //dates
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date")
+    private Date createDate;
+    public String getCreateDate(){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+       String output="Posted on ";
+       output+= dateFormat.format(createDate);
+       output+= " at ";
+       output+= timeFormat.format(createDate);
+     return output;
+    }
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "modify_date")
+    private Date modifyDate;
+    //end dates
 
     @ManyToOne
     private User user;
@@ -50,10 +82,14 @@ public class Recipe extends AbstractEntity  {
     }
     @Override
     public String toString(){
-     String allIng="";
+     String allIng="Ingredients include : ";
         Collections.sort(ingredients);
    for(int i=0;i<ingredients.size();i++){
-       allIng+=ingredients.get(i).getName();
+
+           allIng += ingredients.get(i).getName();
+       if(i!=ingredients.size()-1) {
+           allIng+=",";
+       }
    }
    return allIng;
     }

@@ -18,15 +18,11 @@
     </nav>
     <p th:text="${'hi '+user.getUsername()}"></p>
     <hr>
-    <div th:each="item:${items}">
+    <div th:each="recipe:${items}">
         <hr>
-        <h3 th:text="${item.name}"></h3>
-        <table>
-            <tr th:each="ing:${item.getIngredients()}">
-                <td th:text="${ing}"></td>
-            </tr>
-        </table>
-        <hr></div>
+        <div th:replace="fragments :: recipeShow"></div>
+        <hr>
+    </div>
 
 </div>
 </div>

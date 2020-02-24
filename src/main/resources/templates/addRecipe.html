@@ -33,8 +33,13 @@
             <input type="checkbox" name="ingredients" th:value="${ingredient.id}">
             <label th:text="${ingredient.name}"></label>
         </th:block>-->
+
     </div>
-    <button>save recipe</button>
+    <div class="form-group">
+        <textarea id="instruction" class="form-control" th:field="${recipe.instruction}" />
+        <span th:errprs="${recipe.name}" class="error"></span>
+    </div>
+    <button id="save">Post recipe</button>
 </form>
     <input id="ingName"  placeholder="search Ingredient"/>
     <div id="result"></div>

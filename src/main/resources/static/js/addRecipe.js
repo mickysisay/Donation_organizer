@@ -43,6 +43,12 @@ console.log($("#ingredientName").val().length)
         }
 
 })
+$("#instruction").change(()=>{
+     console.log(marked($("#instruction").val()));;
+});
+document.getElementById("save").addEventListener("click",()=>{
+    $("#instruction").val(marked($("#instruction").val()));
+})
 
 function inputResults(res){
   let result = document.getElementById("result");
@@ -54,7 +60,7 @@ function inputResults(res){
 
     }
      result.innerHTML =allResults;
-    if(res.length===0){
+    if(res.length===0 && $("#ingName").val().trim()!=""){
     result.innerHTML="";
     allResults+="<P>no ingredients found</p>"
    allResults+= '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Add new Ingredient </button>';
