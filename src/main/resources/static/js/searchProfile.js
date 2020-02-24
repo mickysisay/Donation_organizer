@@ -1,7 +1,7 @@
 window.onload=()=>{
 const searchWord = document.getElementById("searchWord");
-
 $("#searchWord").keyup(()=>{
+
     $.ajax({
                       type: "GET",
                       url: "/searches/users",

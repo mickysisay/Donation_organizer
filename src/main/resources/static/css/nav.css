@@ -194,3 +194,9 @@ a.article:hover {
    pointer-events: none;
    cursor: default;
 }
+.upvote{
+  color:blue;
+}
+.nothing{
+  color:black;
+}

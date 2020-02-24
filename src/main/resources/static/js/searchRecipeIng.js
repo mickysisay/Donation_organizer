@@ -1,4 +1,4 @@
-window.onload = function(){
+
  let arr = [];
  document.getElementById("resul").addEventListener("click",(e)=>{
   let ar = e.target.id.split(",");
@@ -13,7 +13,7 @@ window.onload = function(){
                        },
                        success:function(response){
 
-                       inputResults(response);
+                       inputResult(response);
 
                        }
                        });});
@@ -34,7 +34,7 @@ window.onload = function(){
     document.getElementById("form").addEventListener("submit",()=>{
     document.getElementById("ingList").value = arr.join(",");
     })
-  function inputResults(res){
+  function inputResult(res){
   let result = document.getElementById("resul");
   let allResults = "";
   for(let i=0;i<res.length;i++){
@@ -61,4 +61,3 @@ window.onload = function(){
    }
 
 
-}

@@ -4,6 +4,7 @@ package org.launchcode.Donation_organizer.controllers;
 import org.launchcode.Donation_organizer.models.Ingredient;
 import org.launchcode.Donation_organizer.models.Recipe;
 import org.launchcode.Donation_organizer.models.SearchAlgorithms;
+import org.launchcode.Donation_organizer.models.User;
 import org.launchcode.Donation_organizer.models.data.IngredientRepository;
 import org.launchcode.Donation_organizer.models.data.RecipeRepository;
 import org.launchcode.Donation_organizer.models.data.UserRepository;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/search")
 @Controller
@@ -42,7 +45,15 @@ public class SearchController {
         return "search/recipeIng";
     }
     @PostMapping("recipeIng")
-    public String recipeIngSearchResults(Model model,@RequestParam String ingList){
+    public String recipeIngSearchResults(Model model,@RequestParam String ingList,HttpServletRequest request){
+        //finding user
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        model.addAttribute("user",theUser);
+        //
+
+
         List<String> tempList = Arrays.asList(ingList.split(","));
         List<Integer> intList = new ArrayList<>();
         for(String s : tempList) intList.add(Integer.valueOf(s));
@@ -62,7 +73,13 @@ public class SearchController {
         return "search/recipe";
     }
     @PostMapping("recipe")
-    public String SearchRecipeResult(Model model,@RequestParam String searchword){
+    public String SearchRecipeResult(Model model,@RequestParam String searchword,HttpServletRequest request){
+       //finding user
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        model.addAttribute("user",theUser);
+       //
         SearchAlgorithms searchAlgorithms = new SearchAlgorithms();
         List<Recipe> result = new ArrayList<>();
         result =  searchAlgorithms.searchRecipe(recipeRepository.findAll(),searchword);

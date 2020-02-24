@@ -4,10 +4,7 @@ package org.launchcode.Donation_organizer.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +14,23 @@ public class User extends AbstractEntity {
 
     @NotNull
     private String username;
+    //upvoted recipes
+    @ManyToMany
+    private List<Recipe> upvotedRecipes = new ArrayList<>();
+    @JsonIgnore
 
+    public List<Recipe> getUpvotedRecipes() {
+        return upvotedRecipes;
+    }
+
+    public void addUpvotedRecipe(Recipe upvotingRecipes) {
+      upvotedRecipes.add(upvotingRecipes);
+    }
+    public void removeUpvotedRecipe(Recipe upvotingRecipes) {
+        upvotedRecipes.remove(upvotingRecipes);
+    }
+
+    //upvoted recipes end
     @NotNull
     private String pwHash;
     @OneToMany(cascade = CascadeType.ALL)
