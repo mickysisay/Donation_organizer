@@ -1,6 +1,6 @@
 window.onload = function(){
  let arr = [];
- document.getElementById("results").addEventListener("click",(e)=>{
+ document.getElementById("resul").addEventListener("click",(e)=>{
   let ar = e.target.id.split(",");
   addItem(Number(ar[0]),ar[1]);
  })
@@ -35,14 +35,14 @@ window.onload = function(){
     document.getElementById("ingList").value = arr.join(",");
     })
   function inputResults(res){
-  let result = document.getElementById("results");
+  let result = document.getElementById("resul");
   let allResults = "";
   for(let i=0;i<res.length;i++){
   allResults+=`<div class='view overlay zoom' id="${res[i].id},${res[i].name}"><p id="${res[i].id},${res[i].name}">${res[i].name}
   </p></div>`
 
     }
-    console.log(allResults);
+
      result.innerHTML =allResults;
   }
     function addItem(id,name){
@@ -50,10 +50,9 @@ window.onload = function(){
 
     if(!arr.includes(id)){
     $("#ingName").val("");
-     document.getElementById("results").innerHTML="";
+     document.getElementById("resul").innerHTML="";
      arr.push(id);
-     console.log(arr);
-     console.log(id,name);
+
      let chosenIng = document.getElementById("chosenIng");
      let str = chosenIng.innerHTML;
      str+="<p>"+name+"</p>";

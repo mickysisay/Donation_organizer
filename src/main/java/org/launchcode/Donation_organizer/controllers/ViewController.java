@@ -20,14 +20,24 @@ public class ViewController {
     UserRepository userRepository;
     @GetMapping("/recipe/{recipeid}")
     public String viewRecipe(@PathVariable int recipeid, Model model){
-       Recipe recipe = recipeRepository.findById(recipeid).get();
+        Recipe recipe = new Recipe();
+        try {
+            recipe = recipeRepository.findById(recipeid).get();
+        }catch(Exception e){
+            return "redirect:/store";
+        }
        model.addAttribute("recipe",recipe);
 
        return "view/showRecipe";
     }
     @GetMapping("/profile/{userid}")
     public String viewProfile(@PathVariable int userid,Model model){
-        User user = userRepository.findById(userid).get();
+       User user = new User();
+        try {
+             user = userRepository.findById(userid).get();
+        }catch(Exception e){
+        return "redirect:/store";
+    }
         model.addAttribute("user",user);
 
         return "view/showProfile";

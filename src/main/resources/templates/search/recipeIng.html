@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<title>Search Profile</title>
-<link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" th:src="@{/js/searchRecipeIng.js}"></script>
+<head th:replace="fragments :: head">
 </head>
-    <title>Search using ingredients</title>
-</head>
-<body>
 
+
+<body>
+<script type="text/javascript" th:src="@{/js/searchRecipeIng.js}"></script>
+<div id="wrapper">
+    <nav id="sidebar" th:replace="fragments :: nav-bar"></nav>
+    <div id="content">
+        <nav th:replace="fragments :: small-nav"></nav>
    <div id="chosenIng">
 
    </div>
@@ -17,18 +18,27 @@
    <button id="search">search</button>
    </form>
        <input name="ingName" id="ingName">
-<div id="results">
+<div id="resul">
 
 </div>
+   <!--
    <div th:if="${res}">
 
            <div th:replace="fragments :: search-results"></div>
 
-       </div>
-       </div>
-   </div>
-<script>
+       </div>-->
+        <div th:each="recipe:${res}">
+            <hr>
+            <a th:href="@{'/view/profile/' + ${recipe.user.id}}" th:text="${'Author : '+ recipe.getUser().getUsername()}"></a>
+            <div th:replace="fragments :: recipeShow"></div>
+            <hr>
+        </div>
 
-</script>
+       </div>
+
+
+   </div>
+<div th:replace="fragments :: bottom"></div>
+
 </body>
 </html>
