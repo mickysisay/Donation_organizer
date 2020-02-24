@@ -1,6 +1,7 @@
 package org.launchcode.Donation_organizer.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.CascadeType;
@@ -21,14 +22,16 @@ public class User extends AbstractEntity {
     private String pwHash;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
-    private List<Item> items= new ArrayList<>();
-
-    public List<Item> getItems() {
-        return items;
+    private List<Recipe> recipe= new ArrayList<>();
+    //@OneToMany(cascade = CascadeType.ALL)
+    //@JoinColumn
+    @JsonIgnore
+    public List<Recipe> getRecipe() {
+        return recipe;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setItems(List<Recipe> items) {
+        this.recipe = recipe;
     }
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -45,8 +48,8 @@ public class User extends AbstractEntity {
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwHash);
     }
-    public void UpdateUser(Item item){
-        items.add(item);
+    public void UpdateUser(Recipe item){
+        recipe.add(item);
     }
 
 }

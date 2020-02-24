@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+<body>
+<div id="wrapper">
+    <nav id="sidebar" th:replace="fragments :: nav-bar"></nav>
+    <div id="content">
+        <nav th:replace="fragments :: small-nav"></nav>
+
+<h2 th:text="${user.username}"></h2>
+
+<div th:each="recipe:${user.getRecipe()}">
+    <hr>
+    <a th:href="@{'/view/recipe/' + ${recipe.id}}" >
+
+        <div th:replace="fragments :: recipeShow"></div>
+    </a><hr></div>
+    </div></div>
+
+<div th:replace="fragments :: bottom"></div>
+</body>
+</html>

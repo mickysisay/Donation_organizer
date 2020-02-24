@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+<head th:replace="fragments :: head">
 </head>
 <body>
-  <p th:text="${'hi '+user.getUsername()}"></p>
-<hr>
-  <form method="post" action="save">
-      <div class="form-group">
-          <label th:for="name">Item name: </label>
-          <input class="form-control" th:field="${item.name}" />
-          <span th:errors="${item.name}" class="error"></span>
-      </div>
-      <input type="submit" value="Add Item" />
-  </form>
-  <table>
-      <thead></thead>
-      <tr th:each="item:${items}">
-          <td th:text="${item.getName()}"></td>
-      </tr>
-  </table>
-  <button onclick="window.location.href = '/logout';">Log out</button>
+<div id="wrapper">
+<nav id="sidebar" th:replace="fragments :: nav-bar"></nav>
+<div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button>
+        </div>
+    </nav>
+    <p th:text="${'hi '+user.getUsername()}"></p>
+    <hr>
+    <div th:each="recipe:${items}">
+        <hr>
+        <div th:replace="fragments :: recipeShow"></div>
+        <hr>
+    </div>
+
+</div>
+</div>
+
+<div th:replace="fragments :: bottom"></div>
+
+
 </body>
 </html>

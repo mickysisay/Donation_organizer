@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head">
+</head>
+<body>
+<div id="wrapper">
+    <nav id="sidebar" th:replace="fragments :: nav-bar"></nav>
+    <div id="content">
+        <nav th:replace="fragments :: small-nav"></nav>
+        <hr>
+<a th:href="@{'/view/profile/' + ${recipe.user.id}}" th:text="${'Author : '+ recipe.getUser().getUsername()}"></a>
+   <div th:replace="fragments :: recipeShow"></div>
+       <hr>
+</div></div>
+<div th:replace="fragments :: bottom"></div>
+</body>
+</html>
