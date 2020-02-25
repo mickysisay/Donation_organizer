@@ -55,7 +55,7 @@ public class ViewController {
         }catch(Exception e){
         return "redirect:/store";
     }
-        model.addAttribute("user",user);
+        model.addAttribute("users",user);
 
         return "view/showProfile";
     }

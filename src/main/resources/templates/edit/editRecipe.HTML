@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+
+</head>
+<body>
+<script type="text/javascript" th:src="@{/js/addRecipe.js}"></script>
+<div id="wrapper">
+    <nav id="sidebar" th:replace="fragments :: nav-bar"></nav>
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Toggle Sidebar</span>
+                </button>
+            </div>
+        </nav>
+        <!--<button onclick="window.location.href = 'addItem';">addItem</button>
+        -->
+        <form action="edit" method="post">
+            <div class="form-group">
+                <label th:for="name">Name</label>
+                <input class="form-control" th:field="${recipe.name}" th:value="${recipe.name}" />
+                <span th:errors="${recipe.name}" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label id="ing" th:for="ingredient">Items</label>
+                <th:block th:each="ingredient : ${recipe.ingredients}">
+                    <input type="checkbox" name="ingredients" th:value="${ingredient.id}" checked>
+                    <label th:text="${ingredient.name}"></label>
+                </th:block>
+            </div>
+            <div class="form-group">
+                <textarea th:value="${recipe.instruction}" id="instruction" class="form-control" th:field="${recipe.instruction}" />
+                <span th:errprs="${recipe.name}" class="error"></span>
+            </div>
+            <input type="hidden" name="recipeId" th:value="${recipe.id}"/>
+            <button id="save">Post recipe</button>
+        </form>
+        <input id="ingName"  placeholder="search Ingredient"/>
+        <div id="result"></div>
+        <div id="noResult"></div>
+
+        <!--model trail start-->
+
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add ingredient</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input name="ingredientName" id="ingredientName">
+                    </div>
+                    <div class="modal-footer">
+                        <button id="ingAdd" type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--modal trail end-->
+    </div></div>
+
+
+<div th:replace="fragments :: bottom"></div>
+</body>
+</html>

@@ -44,10 +44,10 @@ console.log($("#ingredientName").val().length)
 
 })
 $("#instruction").change(()=>{
-     console.log(marked($("#instruction").val()));;
+
 });
 document.getElementById("save").addEventListener("click",()=>{
-    $("#instruction").val(marked($("#instruction").val()));
+    //$("#instruction").val(marked($("#instruction").val()));
 })
 
 function inputResults(res){

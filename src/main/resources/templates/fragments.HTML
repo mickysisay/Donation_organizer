@@ -67,11 +67,21 @@
     </nav>
 //recipe show
     <div th:fragment="recipeShow">
+      <div>
+          <div class="row">
+          <div><h3 th:text="${recipe.name}"></h3></div>
+          <div th:if="${recipe.user.id==user.id}" class="ml-auto">
+              <form th:action="@{/store/edit}" method="GET" >
+                  <input th:name="recipeId" th:value="${recipe.id}" type="hidden" >
+                  <button>edit</button>
+              </form>
+          </div>
+          </div>
+      </div>
 
-            <h3 th:text="${recipe.name}"></h3>
             <p th:text="${recipe.getCreateDate()}" style="font-size:15px"></p>
             <p th:text="${recipe.toString()}"></p>
-            <div th:utext="${recipe.instruction}"></div>
+            <div class="recipes" th:text="${recipe.instruction}"></div>
             <i th:id="${recipe.id}" class="fa fa-arrow-up" th:classappend="${recipe.hasUserUpvoted(user)} ? upvote : nothing"></i>
             <span th:id="'count'+${recipe.id}" th:text="${recipe.upvoteCounter()}" ></span>
         </div>

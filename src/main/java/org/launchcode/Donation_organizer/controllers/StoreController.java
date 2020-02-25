@@ -62,6 +62,51 @@ public class StoreController {
 
         return "redirect:";
     }
+    //edit
+    @GetMapping("edit")
+    public String editController(@RequestParam Integer recipeId, HttpServletRequest request, Model model ){
+    Recipe recipe= new Recipe();
+
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        recipe = recipeRepository.findById(recipeId).get();
+
+        if(recipe.getUser().getId() == theUser.getId()){
+            model.addAttribute("recipe",recipe);
+            return "edit/editRecipe";
+        }
+        return "redirect:";
+    }
+
+    @PostMapping("edit")
+    public String editPostController(
+            @ModelAttribute @Valid Recipe newRecipe, Errors errors,
+            HttpServletRequest request, Model model,
+            @RequestParam List<Integer> ingredients,@RequestParam Integer recipeId) {
+
+        if (errors.hasErrors()) {
+            return "store";
+        }
+        Recipe recipe = new Recipe();
+
+
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        recipe = recipeRepository.findById(recipeId).get();
+        if(theUser.getId() == recipe.getUser().getId()) {
+            List<Ingredient> ingredients1 = (List<Ingredient>) ingredientRepository.findAllById(ingredients);
+            recipe.setIngredients(ingredients1);
+            recipe.setName(newRecipe.getName());
+            recipe.setInstruction(newRecipe.getInstruction());
+            recipeRepository.save(recipe);
+        }
+
+        return "redirect:";
+    }
+
+    //edit end
     @GetMapping("/addRecipe")
     public String addRecipe(Model model){
         model.addAttribute(new Recipe());

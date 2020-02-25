@@ -1,4 +1,17 @@
 window.onload = function(){
+
+//$(".recipes").each(()=>{
+// let markedOne = marked($(this).html());
+// console.log(markedOne);
+//   //$(this).html();
+//});
+
+let recipess = document.getElementsByClassName("recipes");
+for(let i=0;i<recipess.length;i++){
+   let recipe = recipess[i].innerHTML;
+   recipess[i].innerHTML = marked(recipe);
+
+}
 //fdfff
 const searchWord = document.getElementById("searchWord");
 $("#searchWord").keyup(()=>{
