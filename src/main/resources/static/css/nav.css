@@ -200,3 +200,7 @@ a.article:hover {
 .nothing{
   color:black;
 }
+.container .dropdown-menu {
+    position: absolute;
+    float: none;
+}

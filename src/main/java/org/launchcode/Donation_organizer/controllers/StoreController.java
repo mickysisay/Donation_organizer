@@ -107,6 +107,23 @@ public class StoreController {
     }
 
     //edit end
+    //delete
+    @GetMapping("delete")
+    public String deleteController(@RequestParam Integer recipeId, HttpServletRequest request, Model model ){
+        Recipe recipe= new Recipe();
+
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        recipe = recipeRepository.findById(recipeId).get();
+
+        if(recipe.getUser().getId() == theUser.getId()){
+            recipeRepository.deleteById(recipeId);
+        }
+        return "redirect:";
+    }
+
+    //delete end
     @GetMapping("/addRecipe")
     public String addRecipe(Model model){
         model.addAttribute(new Recipe());

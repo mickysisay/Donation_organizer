@@ -15,20 +15,20 @@ public class User extends AbstractEntity {
     @NotNull
     private String username;
     //upvoted recipes
-    @ManyToMany
-    private List<Recipe> upvotedRecipes = new ArrayList<>();
+  //  @ManyToMany
+   // private List<Recipe> upvotedRecipes = new ArrayList<>();
     @JsonIgnore
 
-    public List<Recipe> getUpvotedRecipes() {
-        return upvotedRecipes;
-    }
-
-    public void addUpvotedRecipe(Recipe upvotingRecipes) {
-      upvotedRecipes.add(upvotingRecipes);
-    }
-    public void removeUpvotedRecipe(Recipe upvotingRecipes) {
-        upvotedRecipes.remove(upvotingRecipes);
-    }
+//   // public List<Recipe> getUpvotedRecipes() {
+//        return upvotedRecipes;
+//    }
+//
+//    public void addUpvotedRecipe(Recipe upvotingRecipes) {
+//      upvotedRecipes.add(upvotingRecipes);
+//    }
+//    public void removeUpvotedRecipe(Recipe upvotingRecipes) {
+//        upvotedRecipes.remove(upvotingRecipes);
+//    }
 
     //upvoted recipes end
     @NotNull

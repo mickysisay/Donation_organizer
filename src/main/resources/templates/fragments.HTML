@@ -71,10 +71,19 @@
           <div class="row">
           <div><h3 th:text="${recipe.name}"></h3></div>
           <div th:if="${recipe.user.id==user.id}" class="ml-auto">
-              <form th:action="@{/store/edit}" method="GET" >
+              <div class="dropdown ele">
+              <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" ><i class="fas fa-ellipsis-v"></i></button>
+                  <ul class="dropdown-menu">
+                  <li><form th:action="@{/store/edit}" method="GET" >
                   <input th:name="recipeId" th:value="${recipe.id}" type="hidden" >
-                  <button>edit</button>
-              </form>
+                  <button  class="btn btn-default">edit</button>
+                  </form></li>
+                      <li><form th:action="@{/store/delete}" method="GET" >
+                          <input th:name="recipeId" th:value="${recipe.id}" type="hidden" >
+                          <button  class="btn btn-default" id="deletes">delete</button>
+                      </form></li>
+                      </ul>
+              </div>
           </div>
           </div>
       </div>

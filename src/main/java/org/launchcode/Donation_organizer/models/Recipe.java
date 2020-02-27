@@ -45,20 +45,24 @@ public class Recipe extends AbstractEntity  {
     private Date modifyDate;
     //end dates
     //list of people who upvoted it
-    @ManyToMany
-    private List<User> upvotedUsers = new ArrayList<>();
+   // @ManyToMany(mappedBy = "upvotedRecipes")
+    @ElementCollection
+    private List<Integer> upvotedUsers = new ArrayList<>();
     @JsonIgnore
-    public List<User> getUpvotedUsers() {
+    public List<Integer> getUpvotedUsers() {
         return upvotedUsers;
     }
     public void removeUpvotingUser(User upvotingUser) {
-        upvotedUsers.remove(upvotingUser);
+
+      int ind = upvotedUsers.indexOf(upvotingUser.getId());
+        upvotedUsers.remove(ind);
+
     }
     public void addUpvotingUser(User upvotingUser) {
-        upvotedUsers.add(upvotingUser);
+        upvotedUsers.add(upvotingUser.getId());
     }
     public boolean hasUserUpvoted(User user){
-        return upvotedUsers.contains(user);
+        return upvotedUsers.contains(user.getId());
     }
     public int upvoteCounter(){
         return upvotedUsers.size();

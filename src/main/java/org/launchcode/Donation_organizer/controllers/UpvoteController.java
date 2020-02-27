@@ -33,18 +33,19 @@ public class UpvoteController {
           return response;
       }
       if(!recipe.hasUserUpvoted(user)){
+          //user.addUpvotedRecipe(recipe);
           recipe.addUpvotingUser(user);
-          user.addUpvotedRecipe(recipe);
-          recipeRepository.save(recipe);
-          userRepository.save(user);
+         recipeRepository.save(recipe);
+        //  userRepository.save(user);
           response.add("upvoted");
          response.add(Integer.toString(recipe.upvoteCounter()));
           return response;
       }else{
+         // user.removeUpvotedRecipe(recipe);
           recipe.removeUpvotingUser(user);
-          user.removeUpvotedRecipe(recipe);
+
           recipeRepository.save(recipe);
-          userRepository.save(user);
+         // userRepository.save(user);
           response.add("removed");
           response.add(Integer.toString(recipe.upvoteCounter()));
           return response;
