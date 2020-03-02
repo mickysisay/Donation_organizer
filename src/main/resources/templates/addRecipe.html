@@ -30,6 +30,7 @@
     <div class="form-group">
         <label id="ing" th:for="ingredient">Items</label>
     </div>
+    <p th:text="${fail}"></p>
     <div class="form-group">
         <textarea id="instruction" class="form-control" th:field="${recipe.instruction}" />
         <span th:errprs="${recipe.name}" class="error"></span>

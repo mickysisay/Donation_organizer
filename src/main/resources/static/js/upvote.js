@@ -77,4 +77,20 @@ function inputResults(res){
    }
 
   });
+  $("#subBut").click((e)=>{
+
+  $.ajax({
+                           type: "GET",
+                           url: "/look/subscribe",
+                           data: {
+                              userId:Number($("#usersId").val())
+                           },
+                           success:function(response){
+                           console.log(Response);
+
+                        }
+                           })
+     $("#subBut").html($("#subBut").html() === "subscribe" ? "unsubscribe" : "subscribe");
+     $()
+  })
 }

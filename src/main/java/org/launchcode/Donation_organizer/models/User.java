@@ -14,23 +14,27 @@ public class User extends AbstractEntity {
 
     @NotNull
     private String username;
-    //upvoted recipes
-  //  @ManyToMany
-   // private List<Recipe> upvotedRecipes = new ArrayList<>();
-    @JsonIgnore
 
-//   // public List<Recipe> getUpvotedRecipes() {
-//        return upvotedRecipes;
-//    }
-//
-//    public void addUpvotedRecipe(Recipe upvotingRecipes) {
-//      upvotedRecipes.add(upvotingRecipes);
-//    }
-//    public void removeUpvotedRecipe(Recipe upvotingRecipes) {
-//        upvotedRecipes.remove(upvotingRecipes);
-//    }
+    //user subscription
+     @ElementCollection
+     List <Integer> subscription = new ArrayList<>();
 
-    //upvoted recipes end
+    public List<Integer> getSubscription() {
+        return subscription;
+    }
+
+    public void editSubscription(int subscribed) {
+        if(isSubscribedTo(subscribed)){
+            this.subscription.remove(this.subscription.indexOf(subscribed));
+        }else{
+            this.subscription.add(subscribed);
+        }
+    }
+    public boolean isSubscribedTo(int userId){
+        return this.subscription.contains(userId);
+    }
+
+    //user subscription
     @NotNull
     private String pwHash;
     @OneToMany(cascade = CascadeType.ALL)

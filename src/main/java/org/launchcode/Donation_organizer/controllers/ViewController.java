@@ -29,6 +29,7 @@ public class ViewController {
         User theUser = (User) option.get();
         model.addAttribute("user",theUser);
         //
+        model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
 
         Recipe recipe = new Recipe();
         try {
@@ -48,7 +49,7 @@ public class ViewController {
         User theUser = (User) option.get();
         model.addAttribute("user",theUser);
         //
-
+        model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
         User user = new User();
         try {
              user = userRepository.findById(userid).get();

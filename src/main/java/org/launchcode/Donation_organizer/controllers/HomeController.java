@@ -42,7 +42,8 @@ public class HomeController {
     }
     @RequestMapping("")
     public String index(){
-        return "index";
+
+        return "redirect:/login";
     }
     @GetMapping("/signup")
     public String displayRegistrationForm(Model model) {

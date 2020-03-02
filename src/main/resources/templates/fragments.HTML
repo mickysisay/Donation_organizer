@@ -53,6 +53,14 @@
             <li>
                 <a th:href="@{/logout}">logout</a>
             </li>
+            <hr>
+            <li style="color:red; margin-left:10px; margin-bottom:10px">
+                 Subscriptions<br>
+            </li>
+            <li th:if="${subUsers}" th:each="subuser : ${subUsers}">
+
+                <a th:href="@{/view/profile/}+${subuser.getId()}" th:text="${subuser.username}"></a>
+            </li>
         </ul>
 
     </nav>

@@ -41,7 +41,11 @@ public class SearchController {
     return "search/profile";
     }
     @GetMapping("/recipeIng")
-    public String recipeIngSearch(){
+    public String recipeIngSearch(HttpServletRequest request, Model model){
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
         return "search/recipeIng";
     }
     @PostMapping("recipeIng")
@@ -69,7 +73,11 @@ public class SearchController {
         return "search/recipeIng";
     }
     @GetMapping("recipe")
-    public String searchRecipe(){
+    public String searchRecipe(HttpServletRequest request, Model model){
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
         return "search/recipe";
     }
     @PostMapping("recipe")
