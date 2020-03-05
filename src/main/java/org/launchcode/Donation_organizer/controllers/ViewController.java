@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
+
 @RequestMapping("/view")
 @Controller
 public class ViewController {
@@ -19,7 +22,15 @@ public class ViewController {
     @Autowired
     UserRepository userRepository;
     @GetMapping("/recipe/{recipeid}")
-    public String viewRecipe(@PathVariable int recipeid, Model model){
+    public String viewRecipe(@PathVariable int recipeid, Model model, HttpServletRequest request){
+        //finding user
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        model.addAttribute("user",theUser);
+        //
+        model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
+
         Recipe recipe = new Recipe();
         try {
             recipe = recipeRepository.findById(recipeid).get();
@@ -31,14 +42,21 @@ public class ViewController {
        return "view/showRecipe";
     }
     @GetMapping("/profile/{userid}")
-    public String viewProfile(@PathVariable int userid,Model model){
-       User user = new User();
+    public String viewProfile(@PathVariable int userid,Model model,HttpServletRequest request){
+        //finding user
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        model.addAttribute("user",theUser);
+        //
+        model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
+        User user = new User();
         try {
              user = userRepository.findById(userid).get();
         }catch(Exception e){
         return "redirect:/store";
     }
-        model.addAttribute("user",user);
+        model.addAttribute("users",user);
 
         return "view/showProfile";
     }

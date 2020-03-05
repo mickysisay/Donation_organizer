@@ -194,3 +194,13 @@ a.article:hover {
    pointer-events: none;
    cursor: default;
 }
+.upvote{
+  color:blue;
+}
+.nothing{
+  color:black;
+}
+.container .dropdown-menu {
+    position: absolute;
+    float: none;
+}

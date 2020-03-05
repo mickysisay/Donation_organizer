@@ -33,20 +33,29 @@ public class StoreController {
    Integer id = (Integer) request.getSession().getAttribute("user");
         Optional option =   userRepository.findById(id);
    User theUser = (User) option.get();
+   model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
        model.addAttribute("user",theUser);
         model.addAttribute(new Recipe());
         model.addAttribute("items",theUser.getRecipe());
         return "storehome";
     }
+   //save fail
+   @RequestMapping(value = "/save" ,method = RequestMethod.POST)
+   public String failSave(@ModelAttribute @Valid Recipe newRecipe, Errors errors,
+                          HttpServletRequest request, Model model){
+        model.addAttribute("fail","sorry you have to add ingredients");
+       return "addRecipe";
+    }
 
-    @PostMapping("/save")
+
+    @RequestMapping(value = "/save" ,method = RequestMethod.POST,params = "ingredients")
     public String processAddEmployerForm(
             @ModelAttribute @Valid Recipe newRecipe, Errors errors,
             HttpServletRequest request, Model model,
             @RequestParam List<Integer> ingredients) {
 
         if (errors.hasErrors()) {
-            return "store";
+            return "addRecipe";
         }
         Integer id = (Integer) request.getSession().getAttribute("user");
         Optional option =   userRepository.findById(id);
@@ -62,8 +71,74 @@ public class StoreController {
 
         return "redirect:";
     }
+    //edit
+    @GetMapping("edit")
+    public String editController(@RequestParam Integer recipeId, HttpServletRequest request, Model model ){
+    Recipe recipe= new Recipe();
+
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        recipe = recipeRepository.findById(recipeId).get();
+        model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
+        if(recipe.getUser().getId() == theUser.getId()){
+            model.addAttribute("recipe",recipe);
+            return "edit/editRecipe";
+        }
+        return "redirect:";
+    }
+
+    @PostMapping("edit")
+    public String editPostController(
+            @ModelAttribute @Valid Recipe newRecipe, Errors errors,
+            HttpServletRequest request, Model model,
+            @RequestParam List<Integer> ingredients,@RequestParam Integer recipeId) {
+
+        if (errors.hasErrors()) {
+            return "edit/editRecipe";
+        }
+        Recipe recipe = new Recipe();
+
+
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        recipe = recipeRepository.findById(recipeId).get();
+        if(theUser.getId() == recipe.getUser().getId()) {
+            List<Ingredient> ingredients1 = (List<Ingredient>) ingredientRepository.findAllById(ingredients);
+            recipe.setIngredients(ingredients1);
+            recipe.setName(newRecipe.getName());
+            recipe.setInstruction(newRecipe.getInstruction());
+            recipeRepository.save(recipe);
+        }
+
+        return "redirect:";
+    }
+
+    //edit end
+    //delete
+    @GetMapping("delete")
+    public String deleteController(@RequestParam Integer recipeId, HttpServletRequest request, Model model ){
+        Recipe recipe= new Recipe();
+
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        recipe = recipeRepository.findById(recipeId).get();
+
+        if(recipe.getUser().getId() == theUser.getId()){
+            recipeRepository.deleteById(recipeId);
+        }
+        return "redirect:";
+    }
+
+    //delete end
     @GetMapping("/addRecipe")
-    public String addRecipe(Model model){
+    public String addRecipe(HttpServletRequest request, Model model){
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
         model.addAttribute(new Recipe());
        model.addAttribute("ingredients",ingredientRepository.findAll());
 

@@ -1,5 +1,6 @@
 package org.launchcode.Donation_organizer.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -43,7 +44,30 @@ public class Recipe extends AbstractEntity  {
     @Column(name = "modify_date")
     private Date modifyDate;
     //end dates
+    //list of people who upvoted it
+   // @ManyToMany(mappedBy = "upvotedRecipes")
+    @ElementCollection
+    private List<Integer> upvotedUsers = new ArrayList<>();
+    @JsonIgnore
+    public List<Integer> getUpvotedUsers() {
+        return upvotedUsers;
+    }
+    public void removeUpvotingUser(User upvotingUser) {
 
+      int ind = upvotedUsers.indexOf(upvotingUser.getId());
+        upvotedUsers.remove(ind);
+
+    }
+    public void addUpvotingUser(User upvotingUser) {
+        upvotedUsers.add(upvotingUser.getId());
+    }
+    public boolean hasUserUpvoted(User user){
+        return upvotedUsers.contains(user.getId());
+    }
+    public int upvoteCounter(){
+        return upvotedUsers.size();
+    }
+    //end of list
     @ManyToOne
     private User user;
     @NotBlank

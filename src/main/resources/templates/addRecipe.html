@@ -29,12 +29,8 @@
 
     <div class="form-group">
         <label id="ing" th:for="ingredient">Items</label>
-       <!-- <th:block th:each="ingredient : ${ingredients}">
-            <input type="checkbox" name="ingredients" th:value="${ingredient.id}">
-            <label th:text="${ingredient.name}"></label>
-        </th:block>-->
-
     </div>
+    <p th:text="${fail}"></p>
     <div class="form-group">
         <textarea id="instruction" class="form-control" th:field="${recipe.instruction}" />
         <span th:errprs="${recipe.name}" class="error"></span>

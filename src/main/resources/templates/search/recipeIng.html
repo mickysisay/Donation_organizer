@@ -5,7 +5,7 @@
 
 
 <body>
-<script type="text/javascript" th:src="@{/js/searchRecipeIng.js}"></script>
+
 <div id="wrapper">
     <nav id="sidebar" th:replace="fragments :: nav-bar"></nav>
     <div id="content">
@@ -21,12 +21,7 @@
 <div id="resul">
 
 </div>
-   <!--
-   <div th:if="${res}">
 
-           <div th:replace="fragments :: search-results"></div>
-
-       </div>-->
         <div th:each="recipe:${res}">
             <hr>
             <a th:href="@{'/view/profile/' + ${recipe.user.id}}" th:text="${'Author : '+ recipe.getUser().getUsername()}"></a>
@@ -39,6 +34,6 @@
 
    </div>
 <div th:replace="fragments :: bottom"></div>
-
+<script type="text/javascript" th:src="@{/js/searchRecipeIng.js}"></script>
 </body>
 </html>
