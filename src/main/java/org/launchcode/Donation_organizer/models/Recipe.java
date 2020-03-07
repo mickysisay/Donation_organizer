@@ -15,7 +15,7 @@ import java.util.*;
 public class Recipe extends AbstractEntity  {
 
     @NotBlank
-    @Size(min = 100, max = 5000, message = "instruction should be between 100 and 5000")
+    @Size(min = 1, max = 5000, message = "instruction should be between 100 and 5000")
     private String instruction;
 
     public String getInstruction() {
@@ -44,6 +44,17 @@ public class Recipe extends AbstractEntity  {
     @Column(name = "modify_date")
     private Date modifyDate;
     //end dates
+    //score
+    private double score=0;
+    public double getScore(){
+        if(upvotedUsers.size() ==0){
+            return 0;
+        }
+   long diff = new Date().getTime()- this.createDate.getTime();
+    score = Math.log10(upvotedUsers.size())+ diff/4500;
+    return score;
+    }
+    //scoreEnd
     //list of people who upvoted it
    // @ManyToMany(mappedBy = "upvotedRecipes")
     @ElementCollection

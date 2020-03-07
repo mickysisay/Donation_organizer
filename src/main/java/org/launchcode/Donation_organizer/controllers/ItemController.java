@@ -37,12 +37,17 @@ public class ItemController {
     }
     @PostMapping("addItem")
     public String addIngRest(@RequestParam String ingredientName){
-        if(ingredientName.trim().length()>3){
-           Ingredient ingredient = new Ingredient();
-           ingredient.setName(ingredientName);
-           ingredientRepository.save(ingredient);
-           return "ingredient added succesfully";
-        }else{
+    // System.out.println(ingredientRepository.findByName(ingredientName).getName());
+         if(ingredientRepository.findByName(ingredientName) != null){
+            return "ingredient already exists";
+        }
+        if(ingredientName.trim().length()>3 ) {
+            Ingredient ingredient = new Ingredient();
+            ingredient.setName(ingredientName);
+            ingredientRepository.save(ingredient);
+            return "ingredient added succesfully";
+        }
+        else{
             return "there was a problem adding ingredient";
         }
     }

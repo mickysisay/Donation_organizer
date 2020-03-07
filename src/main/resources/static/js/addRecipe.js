@@ -59,14 +59,19 @@ function inputResults(res){
   </p></div>`
 
     }
-     result.innerHTML =allResults;
-    if(res.length===0 && $("#ingName").val().trim()!=""){
+    console.log(res.length);
+     //result.innerHTML =allResults;
+    if(res.length===0  ){
+      if($("#ingName").val().trim()!=""){
+      allResults = "";
     result.innerHTML="";
     allResults+="<P>no ingredients found</p>"
    allResults+= '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Add new Ingredient </button>';
     noResult.innerHTML = allResults;
+    }
     }else{
-    allResults.innerHTML="";
+    result.innerHTML = "";
+    //allResults.innerHTML="";
        result.innerHTML =allResults;
     }
 

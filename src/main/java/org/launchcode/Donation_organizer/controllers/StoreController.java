@@ -7,6 +7,7 @@ import org.launchcode.Donation_organizer.models.data.ItemRepository;
 import org.launchcode.Donation_organizer.models.data.RecipeRepository;
 import org.launchcode.Donation_organizer.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 @RequestMapping("store")
@@ -61,7 +63,11 @@ public class StoreController {
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         List<Ingredient> ingredients1 = (List<Ingredient>) ingredientRepository.findAllById(ingredients);
-       newRecipe.setIngredients(ingredients1);
+       for(int i=0;i<ingredients1.size();i++){
+           ingredients1.get(i).setVotes(ingredients1.get(i).getVotes()+1);
+           ingredientRepository.save(ingredients1.get(i));
+       }
+        newRecipe.setIngredients(ingredients1);
         theUser.UpdateUser(newRecipe);
         newRecipe.setUser(theUser);
         recipeRepository.save(newRecipe);
@@ -160,5 +166,17 @@ public class StoreController {
         }
       ingredientRepository.save(newIngredient);
         return "addItem";
+    }
+    //popular subscription
+    @GetMapping("/popular")
+    public String showPopular(Model model,HttpServletRequest request){
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        model.addAttribute("user",theUser);
+        List <Recipe> allRecipe = recipeRepository.findByOrderByScoreAsc();
+        model.addAttribute("res", allRecipe);
+        return "list/list-recipes.html";
+
     }
 }
