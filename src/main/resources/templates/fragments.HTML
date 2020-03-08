@@ -12,7 +12,7 @@
     <link th:href="@{/css/nav.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/js/searchProfile.js}"></script>
     <script type="text/javascript" th:src="@{/js/upvote.js}"></script>
-
+    <link rel="stylesheet" href="https://cdn.rawgit.com/toopay/bootstrap-markdown/master/css/bootstrap-markdown.min.css" />
     <!-- Scrollbar Custom CSS -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
@@ -20,6 +20,10 @@
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+
+    <script src="https://cdn.rawgit.com/toopay/bootstrap-markdown/master/js/bootstrap-markdown.js
+"></script>
 
 
  </head>
@@ -55,7 +59,7 @@
             </li>
             <hr>
             <li style="color:red; margin-left:10px; margin-bottom:10px">
-                 Subscriptions<br>
+                <a th:href="@{/subscription}">Subscriptions</a>
             </li>
             <li th:if="${subUsers}" th:each="subuser : ${subUsers}">
 

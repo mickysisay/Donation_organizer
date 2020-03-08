@@ -175,10 +175,12 @@ public class StoreController {
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         model.addAttribute("user",theUser);
+        model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
         List <Recipe> allRecipe = recipeRepository.findAll();
         Collections.sort(allRecipe);
         model.addAttribute("res", allRecipe);
         return "list/list-recipes.html";
 
     }
+
 }

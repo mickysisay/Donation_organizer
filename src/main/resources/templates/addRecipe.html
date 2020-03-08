@@ -4,6 +4,7 @@
 
 </head>
 <body>
+
 <script type="text/javascript" th:src="@{/js/addRecipe.js}"></script>
 <div id="wrapper">
     <nav id="sidebar" th:replace="fragments :: nav-bar"></nav>
@@ -32,7 +33,8 @@
     </div>
     <p th:text="${fail}"></p>
     <div class="form-group">
-        <textarea id="instruction" class="form-control" th:field="${recipe.instruction}" />
+        <label id="instr" th:for="instruction">Instruction</label>
+        <textarea id="instruction" class="form-control" th:field="${recipe.instruction}" rows="10"  />
         <span th:errprs="${recipe.name}" class="error"></span>
     </div>
     <button id="save">Post recipe</button>
@@ -68,5 +70,7 @@
 
 
 <div th:replace="fragments :: bottom"></div>
+
+<script src="https://rawgit.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js"></script>
 </body>
 </html>

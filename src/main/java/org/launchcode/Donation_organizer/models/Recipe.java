@@ -30,6 +30,9 @@ public class Recipe extends AbstractEntity implements Comparable<Recipe> {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date")
     private Date createDate;
+    public long getTimeCreateDate(){
+        return createDate.getTime();
+    }
     public String getCreateDate(){
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         DateFormat timeFormat = new SimpleDateFormat("HH:mm");
@@ -50,9 +53,7 @@ public class Recipe extends AbstractEntity implements Comparable<Recipe> {
 
    long diff = (this.createDate.getTime()-new Date().getTime())/1000;
 
-        if(upvotedUsers.size() ==0){
-            return (double) diff/45000;
-        }
+
        double something =(double) diff/45000;
     score = Math.log10(upvotedUsers.size())+ something;
     return score;

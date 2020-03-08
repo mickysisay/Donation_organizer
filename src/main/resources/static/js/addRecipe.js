@@ -43,6 +43,14 @@ console.log($("#ingredientName").val().length)
         }
 
 })
+ $("#instruction").markdown({
+    autofocus: false,
+    height: 270,
+    iconlibrary: 'fa',
+    onShow: function(e) {
+      //e.hideButtons('cmdPreview');
+      e.change(e);
+    }});
 $("#instruction").change(()=>{
 
 });
