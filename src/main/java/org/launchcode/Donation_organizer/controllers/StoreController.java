@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -174,7 +175,8 @@ public class StoreController {
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         model.addAttribute("user",theUser);
-        List <Recipe> allRecipe = recipeRepository.findByOrderByScoreAsc();
+        List <Recipe> allRecipe = recipeRepository.findAll();
+        Collections.sort(allRecipe);
         model.addAttribute("res", allRecipe);
         return "list/list-recipes.html";
 

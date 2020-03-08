@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
-public class Recipe extends AbstractEntity  {
+public class Recipe extends AbstractEntity implements Comparable<Recipe> {
 
     @NotBlank
     @Size(min = 1, max = 5000, message = "instruction should be between 100 and 5000")
@@ -47,12 +47,23 @@ public class Recipe extends AbstractEntity  {
     //score
     private double score=0;
     public double getScore(){
+
+   long diff = (this.createDate.getTime()-new Date().getTime())/1000;
+
         if(upvotedUsers.size() ==0){
-            return 0;
+            return (double) diff/45000;
         }
-   long diff = new Date().getTime()- this.createDate.getTime();
-    score = Math.log10(upvotedUsers.size())+ diff/4500;
+       double something =(double) diff/45000;
+    score = Math.log10(upvotedUsers.size())+ something;
     return score;
+    }
+    @Override
+    public int compareTo(Recipe u) {
+        if(this.getScore()>u.getScore())
+            return -1;
+        else if(this.getScore()<u.getScore())
+            return 1;
+        return 0;
     }
     //scoreEnd
     //list of people who upvoted it
