@@ -12,7 +12,7 @@ for(let i=0;i<recipess.length;i++){
    recipess[i].innerHTML = marked(recipe);
 
 }
-$("#delete").click((e)=>{
+$(".delete").click((e)=>{
     let res = confirm("are you sure you want to delete recipe?");
     if(res === true){
     }else{

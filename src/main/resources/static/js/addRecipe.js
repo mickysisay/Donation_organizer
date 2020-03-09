@@ -43,6 +43,7 @@ console.log($("#ingredientName").val().length)
         }
 
 })
+
  $("#instruction").markdown({
     autofocus: false,
     height: 270,

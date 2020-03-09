@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <title>recipe</title>
-
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link th:href="@{/css/nav.css}" rel="stylesheet" />
@@ -68,13 +67,18 @@
         </ul>
 
     </nav>
-    <nav th:fragment="small-nav" class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-
+    <nav th:fragment="small-nav" class="navbar navbar-inverse navbar-expand-lg  navbar-light bg-light">
+        <div class="container-fluid row">
+        <div>
             <button type="button" id="sidebarCollapse" class="btn btn-info">
                 <i class="fas fa-align-left"></i>
                 <span>Toggle Sidebar</span>
             </button>
+        </div>
+        <div class="ml-auto">
+            <a class="btn btn-info" th:href="@{/store/popular}">Popular</a>
+        </div>
+
         </div>
     </nav>
 //recipe show
@@ -92,7 +96,7 @@
                   </form></li>
                       <li><form th:action="@{/store/delete}" method="GET" >
                           <input th:name="recipeId" th:value="${recipe.id}" type="hidden" >
-                          <button  class="btn btn-default" id="deletes">delete</button>
+                          <button  class="btn btn-default deletes" >delete</button>
                       </form></li>
                       </ul>
               </div>
@@ -134,7 +138,9 @@
         <!-- Popper.JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
         <!-- Bootstrap JS -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+
         <!-- jQuery Custom Scroller CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
