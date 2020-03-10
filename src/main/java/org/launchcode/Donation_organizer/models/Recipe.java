@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import org.ocpsoft.prettytime.PrettyTime;
 
 @Entity
 public class Recipe extends AbstractEntity implements Comparable<Recipe> {
@@ -36,10 +37,17 @@ public class Recipe extends AbstractEntity implements Comparable<Recipe> {
     public String getCreateDate(){
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         DateFormat timeFormat = new SimpleDateFormat("HH:mm");
-       String output="Posted on ";
-       output+= dateFormat.format(createDate);
-       output+= " at ";
-       output+= timeFormat.format(createDate);
+        PrettyTime p = new PrettyTime();
+        String output;
+        output="<p style=\"font-size:15px; \">posted ";
+        output += p.format(createDate);
+        output+="</p>";
+       if(!createDate.equals(modifyDate)){
+           output += "<p style=\"font-size:15px; margin-top:-15px\">updated ";
+           output += p.format(modifyDate);
+           output+="</p>";
+       }
+
      return output;
     }
     @UpdateTimestamp

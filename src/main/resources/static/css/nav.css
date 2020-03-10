@@ -63,7 +63,7 @@ a:focus {
 }
 
 #sidebar {
-    width: 200px;
+    width: 250px;
     position: fixed;
     top: 0;
     left: 0;
@@ -157,7 +157,7 @@ a.article:hover {
 
 #content {
     width: calc(100% - 250px);
-    padding: 20px;
+    padding: 40px;
     min-height: 100vh;
     transition: all 0.3s;
     position: absolute;
@@ -174,9 +174,19 @@ a.article:hover {
 ----------------------------------------------------- */
 
 @media (max-width: 768px) {
-    #sidebar {
-        margin-left: -200px;
-    }
+  #sidebar {
+    width: 120px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #7386D5;
+    color: #fff;
+    transition: all 0.3s;
+    margin-left: -120px;
+   }
+
     #sidebar.active {
         margin-left: 0;
     }
@@ -184,11 +194,22 @@ a.article:hover {
         width: 90%;
     }
     #content.active {
-        width: calc(100% - 200px);
+        width: calc(100% - 120px);
     }
     #sidebarCollapse span {
         display: none;
     }
+    #sidebar ul li a {
+        padding: 10px;
+        font-size: 0.7em;
+        display: block;
+    }
+    ul ul a {
+        font-size: 0.7em !important;
+        padding-left: 30px !important;
+        background: #6d7fcc;
+    }
+
 }
 .inactiveLink {
    pointer-events: none;

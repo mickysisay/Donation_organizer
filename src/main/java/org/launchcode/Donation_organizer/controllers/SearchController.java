@@ -50,6 +50,9 @@ public class SearchController {
     }
     @PostMapping("recipeIng")
     public String recipeIngSearchResults(Model model,@RequestParam String ingList,HttpServletRequest request){
+        if(ingList.isEmpty()){
+            return "search/recipeing";
+        }
         //finding user
         Integer id = (Integer) request.getSession().getAttribute("user");
         Optional option =   userRepository.findById(id);
@@ -69,6 +72,7 @@ public class SearchController {
 
         }
 
+       // model.addAttribute("ed",ingList);
         model.addAttribute("res",result);
         return "search/recipeIng";
     }

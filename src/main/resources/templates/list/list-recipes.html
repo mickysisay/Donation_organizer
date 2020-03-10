@@ -12,7 +12,6 @@
             <a th:href="@{'/view/profile/' + ${recipe.user.id}}" th:text="${'Author : '+ recipe.getUser().getUsername()}"></a>
             <div th:replace="fragments :: recipeShow"></div>
             <hr>
-            <p th:text="${recipe.score}"></p>
         </div>
     </div></div>
 <div th:replace="fragments :: bottom"></div>
