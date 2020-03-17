@@ -22,7 +22,7 @@ function inputResults(res){
 
    }
    if(res.length===0 && $("#searchWord").val().trim()!=="" ){
-   allResults+="<P>no users found</p>"
+   allResults+="<P >no users found</p>"
    }
    result.innerHTML =allResults;
 }

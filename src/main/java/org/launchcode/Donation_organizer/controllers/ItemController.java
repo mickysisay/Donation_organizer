@@ -2,8 +2,10 @@ package org.launchcode.Donation_organizer.controllers;
 
 import org.launchcode.Donation_organizer.models.Ingredient;
 import org.launchcode.Donation_organizer.models.IngredientList;
+import org.launchcode.Donation_organizer.models.Recipe;
 import org.launchcode.Donation_organizer.models.User;
 import org.launchcode.Donation_organizer.models.data.IngredientRepository;
+import org.launchcode.Donation_organizer.models.data.RecipeRepository;
 import org.launchcode.Donation_organizer.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -20,6 +22,8 @@ public class ItemController {
     IngredientRepository ingredientRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    RecipeRepository recipeRepository;
     @GetMapping("searchItem")
     public List<Ingredient> addItem(@RequestParam String searchWord){
       List<Ingredient> allFound= ingredientRepository.findAll();
@@ -66,6 +70,20 @@ public class ItemController {
             return "fail";
         }
 
+
+    }
+    @PostMapping("save")
+    public String saveAdder(@RequestParam Integer recipeId, HttpServletRequest request, Model model){
+        try{
+            Integer subbingUserId = (Integer) request.getSession().getAttribute("user");
+            Recipe recipe = recipeRepository.findById(recipeId).get();
+            User addingUser = userRepository.findById(subbingUserId).get();
+            addingUser.editSavedRecipes(recipe.getId());
+            userRepository.save(addingUser);
+            return "success";
+        }catch(Exception e){
+            return "fail";
+        }
 
     }
 

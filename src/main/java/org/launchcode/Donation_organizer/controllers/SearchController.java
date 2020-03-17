@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RequestMapping("/search")
 @Controller
@@ -71,7 +68,7 @@ public class SearchController {
             result = searchAlgorithms.searchByIng(recipeRepository.findAll(), toBeSearched);
 
         }
-
+        Collections.sort(result);
        // model.addAttribute("ed",ingList);
         model.addAttribute("res",result);
         return "search/recipeIng";

@@ -14,7 +14,23 @@ public class User extends AbstractEntity {
 
     @NotNull
     private String username;
-
+     //saved recipes
+    @ElementCollection
+   private List<Integer> savedRecipes = new ArrayList<>();
+    public List<Integer> getSavedRecipes(){
+        return savedRecipes;
+    }
+    public boolean isRecipeSaved(int recipeId){
+        return this.savedRecipes.contains(recipeId);
+    }
+    public void editSavedRecipes(int recipeId){
+        if(isRecipeSaved(recipeId)){
+           this.savedRecipes.remove(this.savedRecipes.indexOf(recipeId));
+        }else{
+            this.savedRecipes.add(recipeId);
+        }
+    }
+    //end of saved recipes
     //user subscription
      @ElementCollection
      List <Integer> subscription = new ArrayList<>();

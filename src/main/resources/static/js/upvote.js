@@ -78,7 +78,7 @@ function inputResults(res){
 
   });
   $("#subBut").click((e)=>{
-
+     console.log($("#subBut"));
   $.ajax({
                            type: "GET",
                            url: "/look/subscribe",
@@ -93,4 +93,20 @@ function inputResults(res){
      $("#subBut").html($("#subBut").html() === "subscribe" ? "unsubscribe" : "subscribe");
      $()
   })
+  $(".saveRecipe").click((e)=>{
+
+
+    $.ajax({
+                             type: "POST",
+                             url: "/look/save",
+                             data: {
+                                recipeId:Number(e.currentTarget.id.split(",")[1])
+                             },
+                             success:function(response){
+
+                          }
+                             })
+      document.getElementById(e.currentTarget.id).innerHTML = document.getElementById(e.currentTarget.id).innerHTML === "save" ?"unsave" : "save";
+
+    })
 }

@@ -70,8 +70,8 @@
     <nav th:fragment="small-nav" class="navbar navbar-inverse navbar-expand-lg  navbar-light bg-light">
         <div class="container-fluid row">
         <div>
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
-                <i class="fas fa-align-left"></i>
+            <button type="button" id="sidebarCollapse" class="btn btn-info ico">
+                <i class="fas fa-align-left ico"></i>
                 <span>Toggle Sidebar</span>
             </button>
         </div>
@@ -86,18 +86,22 @@
       <div>
           <div class="row">
           <div><h3 th:text="${recipe.name}"></h3></div>
-          <div th:if="${recipe.user.id==user.id}" class="ml-auto">
+          <div class="ml-auto">
               <div class="dropdown ele">
               <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" ><i class="fas fa-ellipsis-v"></i></button>
                   <ul class="dropdown-menu">
-                  <li><form th:action="@{/store/edit}" method="GET" >
+                  <li  th:if="${recipe.user.id==user.id}"><form th:action="@{/store/edit}" method="GET" >
                   <input th:name="recipeId" th:value="${recipe.id}" type="hidden" >
                   <button  class="btn btn-default">edit</button>
                   </form></li>
-                      <li><form th:action="@{/store/delete}" method="GET" >
+                      <li  th:if="${recipe.user.id==user.id}"><form th:action="@{/store/delete}" method="GET" >
                           <input th:name="recipeId" th:value="${recipe.id}" type="hidden" >
                           <button  class="btn btn-default deletes" >delete</button>
                       </form></li>
+                      </li>
+                      <li>
+                          <button th:id="'save,'+${recipe.id}" class="btn btn-default saveRecipe" th:text="${user.isRecipeSaved(recipe.id)? 'unsave' : 'save' }"></button>
+                      </li>
                       </ul>
               </div>
           </div>
