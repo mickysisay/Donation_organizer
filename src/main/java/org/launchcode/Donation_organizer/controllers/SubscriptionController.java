@@ -48,4 +48,15 @@ public class SubscriptionController {
         model.addAttribute("res", allRecipes);
         return "list/list-recipes";
     }
+    @GetMapping("saved")
+    public String savedRecipes(Model model,HttpServletRequest request){
+        Integer id = (Integer) request.getSession().getAttribute("user");
+        Optional option =   userRepository.findById(id);
+        User theUser = (User) option.get();
+        List<Recipe> allRecipes = (List<Recipe>) recipeRepository.findAllById(theUser.getSavedRecipes());
+        model.addAttribute("user",theUser);
+        model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
+        model.addAttribute("res",allRecipes);
+        return "list/list-recipes";
+    }
 }
