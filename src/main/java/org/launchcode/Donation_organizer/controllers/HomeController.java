@@ -88,6 +88,7 @@ public class HomeController {
         model.addAttribute(new LoginFormDTO());
         model.addAttribute("title", "Log In");
         if(request.getSession().getAttribute("user")!= null){
+            System.out.println("usernotfound");
             return "redirect:/store";
        }
 
