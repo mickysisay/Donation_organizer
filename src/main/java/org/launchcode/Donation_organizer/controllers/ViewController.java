@@ -24,7 +24,7 @@ public class ViewController {
     @GetMapping("/recipe/{recipeid}")
     public String viewRecipe(@PathVariable int recipeid, Model model, HttpServletRequest request){
         //finding user
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         model.addAttribute("user",theUser);
@@ -44,7 +44,7 @@ public class ViewController {
     @GetMapping("/profile/{userid}")
     public String viewProfile(@PathVariable int userid,Model model,HttpServletRequest request){
         //finding user
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         model.addAttribute("user",theUser);

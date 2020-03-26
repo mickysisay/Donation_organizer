@@ -21,7 +21,7 @@ public class SubscriptionController {
     RecipeRepository recipeRepository;
     @GetMapping("")
     public String getSubscription(Model model,HttpServletRequest request){
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         model.addAttribute("user",theUser);
@@ -50,7 +50,7 @@ public class SubscriptionController {
     }
     @GetMapping("saved")
     public String savedRecipes(Model model,HttpServletRequest request){
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         List<Recipe> allRecipes = (List<Recipe>) recipeRepository.findAllById(theUser.getSavedRecipes());

@@ -33,7 +33,7 @@ public class StoreController {
 
     @GetMapping("")
     public String Store(Model model, HttpServletRequest request){
-   Integer id = (Integer) request.getSession().getAttribute("user");
+   Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
    User theUser = (User) option.get();
    model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
@@ -60,7 +60,7 @@ public class StoreController {
         if (errors.hasErrors()) {
             return "addRecipe";
         }
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         List<Ingredient> ingredients1 = (List<Ingredient>) ingredientRepository.findAllById(ingredients);
@@ -83,7 +83,7 @@ public class StoreController {
     public String editController(@RequestParam Integer recipeId, HttpServletRequest request, Model model ){
     Recipe recipe= new Recipe();
 
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         recipe = recipeRepository.findById(recipeId).get();
@@ -107,7 +107,7 @@ public class StoreController {
         Recipe recipe = new Recipe();
 
 
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         recipe = recipeRepository.findById(recipeId).get();
@@ -128,7 +128,7 @@ public class StoreController {
     public String deleteController(@RequestParam Integer recipeId, HttpServletRequest request, Model model ){
         Recipe recipe= new Recipe();
 
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         recipe = recipeRepository.findById(recipeId).get();
@@ -142,7 +142,7 @@ public class StoreController {
     //delete end
     @GetMapping("/addRecipe")
     public String addRecipe(HttpServletRequest request, Model model){
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
@@ -171,7 +171,7 @@ public class StoreController {
     //popular subscription
     @GetMapping("/popular")
     public String showPopular(Model model,HttpServletRequest request){
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         model.addAttribute("user",theUser);

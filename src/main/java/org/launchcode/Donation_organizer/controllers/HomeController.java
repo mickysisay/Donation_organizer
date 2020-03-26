@@ -20,7 +20,7 @@ import java.util.Optional;
 public class HomeController {
     @Autowired
     UserRepository userRepository;
-    private static final String userSessionKey = "user";
+    private static final String userSessionKey = "reverseRecipeUser";
 
     public User getUserFromSession(HttpSession session) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
@@ -87,7 +87,7 @@ public class HomeController {
     public String displayLoginForm(Model model,HttpServletRequest request) {
         model.addAttribute(new LoginFormDTO());
         model.addAttribute("title", "Log In");
-        if(request.getSession().getAttribute("user")!= null){
+        if(request.getSession().getAttribute("reverseRecipeUser")!= null){
             System.out.println("usernotfound");
             return "redirect:/store";
        }

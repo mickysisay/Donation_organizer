@@ -21,7 +21,7 @@ public class UpvoteController {
     RecipeRepository recipeRepository;
     @GetMapping("")
     public List<String> upvotePostController(@RequestParam Integer recipeId, HttpServletRequest request, Model model){
-        Integer userId = (Integer) request.getSession().getAttribute("user");
+        Integer userId = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         User user = new User();
       Recipe recipe= new Recipe();
         List<String> response = new ArrayList<>();

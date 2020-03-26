@@ -39,7 +39,7 @@ public class SearchController {
     }
     @GetMapping("/recipeIng")
     public String recipeIngSearch(HttpServletRequest request, Model model){
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
@@ -51,7 +51,7 @@ public class SearchController {
             return "search/recipeing";
         }
         //finding user
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         model.addAttribute("user",theUser);
@@ -75,7 +75,7 @@ public class SearchController {
     }
     @GetMapping("recipe")
     public String searchRecipe(HttpServletRequest request, Model model){
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         model.addAttribute("subUsers", userRepository.findAllById(theUser.getSubscription()));
@@ -84,7 +84,7 @@ public class SearchController {
     @PostMapping("recipe")
     public String SearchRecipeResult(Model model,@RequestParam String searchword,HttpServletRequest request){
        //finding user
-        Integer id = (Integer) request.getSession().getAttribute("user");
+        Integer id = (Integer) request.getSession().getAttribute("reverseRecipeUser");
         Optional option =   userRepository.findById(id);
         User theUser = (User) option.get();
         model.addAttribute("user",theUser);
