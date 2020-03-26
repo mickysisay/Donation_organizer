@@ -30,7 +30,7 @@ public class HomeController {
 
         Optional<User> user = userRepository.findById(userId);
 
-        if (user.isEmpty()) {
+        if (user==null) {
             return null;
         }
 
