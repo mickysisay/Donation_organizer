@@ -30,9 +30,9 @@ public class HomeController {
 
         Optional<User> user = userRepository.findById(userId);
 
-        if (user==null) {
-            return null;
-        }
+//        if (user==null) {
+//            return null;
+//        }
 
         return user.get();
     }
