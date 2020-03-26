@@ -20,7 +20,7 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
 
     @Autowired
     HomeController homeController;
-    private static final List<String> whitelist = Arrays.asList("/login", "/signup", "/logout","/css/log.css","/logo.png");
+    private static final List<String> whitelist = Arrays.asList("","/login", "/signup", "/logout","/css/log.css","/logo.png");
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) throws IOException {

@@ -40,7 +40,7 @@ public class HomeController {
     private static void setUserInSession(HttpSession session, User user) {
         session.setAttribute(userSessionKey, user.getId());
     }
-    @RequestMapping("")
+    @GetMapping("")
     public String index(){
 
         return "index";
