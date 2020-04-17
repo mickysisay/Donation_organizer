@@ -45,13 +45,13 @@ public class HomeController {
 
         return "index";
     }
-    @GetMapping("/signup")
+    @GetMapping("signup")
     public String displayRegistrationForm(Model model) {
         model.addAttribute(new RegisterFormDTO());
         model.addAttribute("title", "Register");
         return "signup";
     }
-    @PostMapping("/signup")
+    @PostMapping("signup")
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
                                           Model model) {
@@ -83,18 +83,18 @@ public class HomeController {
 
         return "redirect:";
     }
-    @GetMapping("/login")
+    @GetMapping("login")
     public String displayLoginForm(Model model,HttpServletRequest request) {
         model.addAttribute(new LoginFormDTO());
         model.addAttribute("title", "Log In");
         if(request.getSession().getAttribute("reverseRecipeUser")!= null){
             System.out.println("usernotfound");
-            return "redirect:/store";
+            return "redirect:store";
        }
 
         return "login";
     }
-    @PostMapping("/login")
+    @PostMapping("login")
     public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
                                    Errors errors, HttpServletRequest request,
                                    Model model) {
@@ -125,10 +125,10 @@ public class HomeController {
         model.addAttribute("user",theUser);
         return "redirect:/store";
     }
-    @GetMapping("/logout")
+    @GetMapping("logout")
     public String logout(HttpServletRequest request){
         request.getSession().invalidate();
-        return "redirect:/login";
+        return "redirect:login";
     }
 
 }
