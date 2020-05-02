@@ -60,8 +60,9 @@ public class ItemController {
 
     public String subscriptionAdder(@RequestParam Integer userId, HttpServletRequest request, Model model){
         try{
-            Integer subbingUserId = (Integer) request.getSession().getAttribute("user");
+            Integer subbingUserId = (Integer) request.getSession().getAttribute("reverseRecipeUser");
             User user = userRepository.findById(userId).get();
+            System.out.println(subbingUserId);
             User addingUser = userRepository.findById(subbingUserId).get();
             addingUser.editSubscription(user.getId());
             userRepository.save(addingUser);
@@ -75,7 +76,8 @@ public class ItemController {
     @PostMapping("save")
     public String saveAdder(@RequestParam Integer recipeId, HttpServletRequest request, Model model){
         try{
-            Integer subbingUserId = (Integer) request.getSession().getAttribute("user");
+            Integer subbingUserId = (Integer) request.getSession().getAttribute("reverseRecipeUser");
+
             Recipe recipe = recipeRepository.findById(recipeId).get();
             User addingUser = userRepository.findById(subbingUserId).get();
             addingUser.editSavedRecipes(recipe.getId());

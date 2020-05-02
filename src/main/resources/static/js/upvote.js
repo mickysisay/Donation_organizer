@@ -74,9 +74,61 @@ function inputResults(res){
      let num=Number( $("#count"+e.currentTarget.id).html());
 
             $("#count"+e.currentTarget.id).html(num+1);
-   }
+   };});
+   //start
+   let touchmoved;
+    let tapped=false;
+   $('.recipess').on('touchend', function(e){
 
-  });
+       if(touchmoved != true){
+           // button click action
+
+                if(!tapped){ //if tap is not set, set up single tap
+                     tapped=setTimeout(function(){
+                         tapped=null
+                         e.preventDefault()
+
+                     },300);   //wait 300ms then run single click code
+                   } else {    //tapped within 300ms of last tap. double tap
+                     clearTimeout(tapped); //stop single tap callback
+                     tapped=null
+
+                     //insert things you want to do when double tapped
+                        $.ajax({
+                                                 type: "GET",
+                                                 url: "/upvote",
+                                                 data: {
+                                                    recipeId:Number(e.currentTarget.id.split(",")[1])
+                                                 },
+                                                 success:function(response){
+                                                // console.log(Response);
+
+                                                 }
+                                                 })
+
+                           if($("#"+e.currentTarget.id.split(",")[1]).css("color")=="rgb(0, 0, 255)"){
+                           let num=Number( $("#count"+e.currentTarget.id.split(",")[1]).html())
+
+                               $("#count"+e.currentTarget.id.split(",")[1]).html(num-1);
+                               $("#"+e.currentTarget.id.split(",")[1]).css("color","black");
+                           }else{
+                             $("#"+e.currentTarget.id.split(",")[1]).css("color","blue");
+                             let num=Number( $("#count"+e.currentTarget.id.split(",")[1]).html());
+
+                                    $("#count"+e.currentTarget.id.split(",")[1]).html(num+1);
+                           }
+                   }
+                   e.preventDefault()
+           //
+       }
+   }).on('touchmove', function(e){
+       touchmoved = true;
+   }).on('touchstart', function(){
+       touchmoved = false;
+   });
+   //
+
+
   $("#subBut").click((e)=>{
      console.log($("#subBut"));
   $.ajax({

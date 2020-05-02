@@ -110,14 +110,14 @@
           </div>
           </div>
       </div>
-
+   <div  th:id="'rec,'+${recipe.id}" th:class="recipess">
             <div th:utext="${recipe.getCreateDate()}" style="font-size:15px"></div>
             <p th:text="${recipe.toString()}"></p>
             <div class="recipes" th:text="${recipe.instruction}"></div>
             <i th:id="${recipe.id}" class="fa fa-arrow-up" th:classappend="${recipe.hasUserUpvoted(user)} ? upvote : nothing"></i>
             <span th:id="'count'+${recipe.id}" th:text="${recipe.upvoteCounter()}" ></span>
         </div>
-
+    </div>
 //recipe show end
 <div th:fragment="search-results">
     <div class="panel-group">

@@ -2,7 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
-	id 'war'
+
 }
 
 group = 'org.launchcode'
@@ -15,9 +15,7 @@ configurations {
 		extendsFrom developmentOnly
 	}
 }
-war {
-	enabled=true
-}
+
 
 repositories {
 	mavenCentral()
@@ -35,7 +33,7 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
 }
 
 test {
